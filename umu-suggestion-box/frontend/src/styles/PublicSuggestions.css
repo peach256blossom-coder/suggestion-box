@@ -1,0 +1,282 @@
+.public-suggestions {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: calc(100vh - 140px);
+}
+
+.suggestions-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.suggestions-header h1 {
+  font-size: 2.5em;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.suggestions-header p {
+  font-size: 1.1em;
+  color: #666;
+}
+
+.user-info-banner {
+  background: #e3f2fd;
+  border-left: 4px solid #2196f3;
+  padding: 12px 15px;
+  border-radius: 5px;
+  margin-top: 20px;
+  display: inline-block;
+  color: #1565c0;
+}
+
+.suggestions-filters {
+  margin-bottom: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.search-input {
+  padding: 12px 20px;
+  font-size: 1em;
+  border: 2px solid #222;
+  border-radius: 5px;
+  width: 100%;
+  transition: border-color 0.3s;
+  background: #111;
+  color: #fff;
+}
+
+.search-input::placeholder {
+  color: #bbb;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: #f9d71c;
+}
+
+.filter-buttons {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.filter-btn {
+  padding: 10px 20px;
+  border: 2px solid #ddd;
+  background: white;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 600;
+  color: #333;
+}
+
+.filter-btn:hover,
+.filter-btn.active {
+  background: #f9d71c;
+  color: #111;
+  border-color: #f9d71c;
+}
+
+.loading {
+  text-align: center;
+  padding: 40px;
+  font-size: 1.1em;
+  color: #666;
+}
+
+.no-suggestions {
+  text-align: center;
+  padding: 35px;
+  background: #111;
+  border-radius: 14px;
+  color: #f9d71c;
+  font-size: 1.05em;
+  border: 1px solid #f9d71c;
+}
+
+.no-suggestions-subtitle {
+  color: #fff;
+  margin-top: 10px;
+}
+
+.sample-suggestion-card {
+  margin: 30px auto 0;
+  max-width: 760px;
+  border-left: 4px solid #f9d71c;
+  background: #1a1a1a;
+  padding: 24px;
+  border-radius: 12px;
+}
+
+.suggestions-list {
+  display: grid;
+  gap: 20px;
+}
+
+.suggestion-card {
+  background: #ffffff;
+  border-left: 6px solid #f9d71c;
+  padding: 25px;
+  border-radius: 16px;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.suggestion-card:hover {
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.16);
+  transform: translateY(-3px);
+}
+
+.suggestion-header {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.suggestion-header h3 {
+  color: #111;
+  margin: 0;
+  font-size: 1.45em;
+  letter-spacing: 0.03em;
+}
+
+.category-badge {
+  display: inline-block;
+  background: #f9d71c;
+  color: #111;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 700;
+  margin-right: 10px;
+}
+
+.status-badge {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  font-size: 0.85em;
+  font-weight: 600;
+}
+
+.status-badge.pending {
+  background: #f9d71c;
+  color: #111;
+}
+
+.status-badge.under_review {
+  background: #ffb300;
+  color: #111;
+}
+
+.status-badge.resolved {
+  background: #d1e7dd;
+  color: #0f5132;
+}
+
+.status-badge.rejected {
+  background: #e64a19;
+  color: #fff;
+}
+
+.suggestion-description {
+  color: #333;
+  line-height: 1.8;
+  margin: 18px 0;
+  font-size: 1rem;
+}
+
+.admin-response {
+  background: #fff8d4;
+  border-left: 4px solid #f9d71c;
+  padding: 18px;
+  margin: 20px 0;
+  border-radius: 12px;
+}
+
+.admin-response strong {
+  color: #b37500;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.admin-response p {
+  color: #333;
+  margin: 0;
+}
+
+.suggestion-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid #f0e1af;
+  padding-top: 18px;
+  margin-top: 22px;
+}
+
+.suggestion-stats {
+  display: flex;
+  gap: 22px;
+  font-size: 0.95em;
+  color: #555;
+}
+
+.anonymous {
+  background: rgba(249, 215, 28, 0.18);
+  color: #7a5a00;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-weight: 700;
+}
+
+.upvote-btn {
+  background: #e64a19;
+  color: white;
+  border: none;
+  padding: 8px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s;
+}
+
+.upvote-btn:hover {
+  background: #111;
+  color: #f9d71c;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .suggestions-header h1 {
+    font-size: 1.8em;
+  }
+
+  .filter-buttons {
+    flex-direction: column;
+  }
+
+  .filter-btn {
+    width: 100%;
+  }
+
+  .suggestion-footer {
+    flex-direction: column;
+    gap: 15px;
+    align-items: flex-start;
+  }
+
+  .upvote-btn {
+    width: 100%;
+  }
+
+  .suggestion-stats {
+    flex-wrap: wrap;
+  }
+}

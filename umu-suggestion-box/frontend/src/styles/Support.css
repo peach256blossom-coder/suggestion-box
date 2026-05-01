@@ -1,0 +1,172 @@
+.support {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: calc(100vh - 140px);
+  color: #fff;
+}
+
+.support-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.support-header h1 {
+  font-size: 2.7em;
+  color: #f9d71c;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.support-header p {
+  color: #ddd;
+  font-size: 1.1em;
+}
+
+.support-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+}
+
+.support-card {
+  background: #111;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  border: 2px solid #f9d71c;
+}
+
+.support-card h2 {
+  color: #f9d71c;
+  margin-bottom: 12px;
+}
+
+.support-card p {
+  color: #ccc;
+}
+
+.support-items {
+  margin-top: 20px;
+}
+
+.support-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  color: #eee;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid rgba(249, 215, 28, 0.25);
+}
+
+.item-icon {
+  color: #f9d71c;
+  font-weight: bold;
+}
+
+.whatsapp-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  margin-top: 18px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: #111;
+  border: 1px solid #25d366;
+  color: white;
+  text-decoration: none;
+}
+
+.whatsapp-link:hover {
+  background: #222;
+}
+
+.whatsapp-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+}
+
+.whatsapp-link strong {
+  display: block;
+  color: #f9d71c;
+  font-size: 1rem;
+}
+
+.whatsapp-link span {
+  display: block;
+  color: #ddd;
+  font-size: 0.95rem;
+}
+
+.support-form {
+  background: #111;
+  padding: 30px;
+  border-radius: 18px;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.35);
+  border: 2px solid #e64a19;
+}
+
+.support-form h2 {
+  color: #f9d71c;
+  margin-bottom: 18px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  color: #f9d71c;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 14px;
+  border: 1px solid #333;
+  border-radius: 10px;
+  background: #111;
+  color: #fff;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: #777;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #f9d71c;
+  box-shadow: 0 0 0 4px rgba(249, 215, 28, 0.12);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 14px;
+  background: linear-gradient(135deg, #e64a19 0%, #111 100%);
+  color: #f9d71c;
+  border: 2px solid #f9d71c;
+  border-radius: 10px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+}
+
+.submit-btn:hover {
+  background: #f9d71c;
+  color: #111;
+  transform: translateY(-2px);
+}
+
+@media (max-width: 768px) {
+  .support-content {
+    grid-template-columns: 1fr;
+  }
+}

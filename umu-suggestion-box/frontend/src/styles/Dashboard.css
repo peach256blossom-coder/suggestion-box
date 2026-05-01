@@ -1,0 +1,74 @@
+.dashboard {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 40px 20px;
+  min-height: calc(100vh - 140px);
+}
+
+.dashboard-header {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.dashboard-header h1 {
+  font-size: 2.5em;
+  color: #333;
+}
+
+.dashboard-tabs {
+  display: flex;
+  gap: 20px;
+  margin-bottom: 30px;
+  border-bottom: 2px solid #ddd;
+}
+
+.tab-btn {
+  padding: 15px 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.05em;
+  font-weight: 600;
+  color: #666;
+  border-bottom: 3px solid transparent;
+}
+
+.tab-btn.active {
+  color: #667eea;
+  border-bottom-color: #667eea;
+}
+
+.dashboard-content {
+  background: white;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.suggestion-item {
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border-left: 4px solid #667eea;
+}
+
+.suggestion-item h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.notification-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  cursor: pointer;
+}
+
+.notification-item.unread {
+  background: #e3f2fd;
+  border-left: 4px solid #667eea;
+}
