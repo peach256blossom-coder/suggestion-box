@@ -92,7 +92,7 @@ const DeanLogin = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                placeholder="dean@stud.umu.ac.ug"
+                placeholder="name@stud.umu.ac.ug"
                 className={errors.email ? 'input-error' : ''}
               />
             </div>
