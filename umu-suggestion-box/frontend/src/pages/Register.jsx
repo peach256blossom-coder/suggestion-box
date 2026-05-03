@@ -94,8 +94,8 @@ const Register = () => {
   return (
     <div className="auth-container">
       <div className="auth-box">
-        <h2>Create Your Account</h2>
-        <p className="auth-subtitle">Join UMU community and share your suggestions anonymously</p>
+        <h2>📝 Register</h2>
+        <p className="auth-subtitle">Create your UMU account and share suggestions</p>
         
         {serverError && (
           <div className="error-message">
@@ -239,7 +239,7 @@ const Register = () => {
                 Creating Account...
               </>
             ) : (
-              'Create My Account'
+              '✓ Create Account'
             )}
           </button>
         </form>

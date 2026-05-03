@@ -87,26 +87,8 @@ const Login = () => {
   return (
     <div className="auth-container">
       <div className="auth-box">
-        <h2>Login to UMU Suggestions Box</h2>
-        <p className="auth-subtitle">Welcome back! Access your suggestions</p>
-        
-        {/* Login Type Tabs */}
-        <div className="login-type-tabs">
-          <button
-            type="button"
-            className={`login-tab ${loginType === 'student' ? 'active' : ''}`}
-            onClick={() => setLoginType('student')}
-          >
-            👨‍🎓 Student/Staff
-          </button>
-          <button
-            type="button"
-            className={`login-tab ${loginType === 'dean' ? 'active' : ''}`}
-            onClick={() => setLoginType('dean')}
-          >
-            👑 Dean
-          </button>
-        </div>
+        <h2>🔓 Login</h2>
+        <p className="auth-subtitle">Access your UMU Notice Board</p>
         
         {serverError && (
           <div className="error-message">
@@ -116,6 +98,20 @@ const Login = () => {
         )}
         
         <form onSubmit={handleSubmit}>
+          {/* Login Type Dropdown */}
+          <div className="form-group">
+            <label>Login as *</label>
+            <select 
+              name="loginType" 
+              value={loginType} 
+              onChange={(e) => setLoginType(e.target.value)}
+              className="form-select"
+            >
+              <option value="student">Student/Faculty</option>
+              <option value="dean">Dean of Students</option>
+            </select>
+          </div>
+          
           {/* Email Field */}
           <div className="form-group">
             <label>{loginType === 'dean' ? 'Email Address' : 'UMU Campus Email'} *</label>
@@ -180,14 +176,19 @@ const Login = () => {
                 Logging in...
               </>
             ) : (
-              loginType === 'dean' ? '👑 Login as Dean' : 'Login'
+              '✓ Login'
             )}
           </button>
         </form>
 
-        <p className="auth-link">
-          Don't have an account? <Link to="/register">Register here</Link>
-        </p>
+        <div className="auth-links-section">
+          <p className="auth-link">
+            Don't have an account? <Link to="/register">Register here</Link>
+          </p>
+          <p className="auth-link">
+            Need an admin account? <Link to="/register">Create one here</Link>
+          </p>
+        </div>
       </div>
     </div>
   );
