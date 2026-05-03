@@ -35,7 +35,7 @@ const Footer = () => {
         <div className="footer-section">
           <h3>Contact</h3>
           <ul>
-            <li>Email: support@umusuggestionsbox.com</li>
+            <li>Email: suggestions@umu.ac.com</li>
             <li>Phone: +256-791-0423-02</li>
             <li>Location: Nkozi Campus</li>
           </ul>
