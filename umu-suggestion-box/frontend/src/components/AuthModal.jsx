@@ -224,27 +224,17 @@ const AuthModal = ({ isOpen, onClose, type = 'login' }) => {
               <label>{authType === 'login' ? (loginType === 'dean' ? 'Dean Email Address *' : 'UMU Campus Email *') : 'UMU Email *'}</label>
               <div className="input-wrapper">
                 <input
-                  type={showEmail ? 'text' : 'email'}
+                  type="email"
                   name="email"
                   value={formData.email}
                   onChange={handleChange}
-                  placeholder={authType === 'login' ? (loginType === 'dean' ? 'dean@stud.umu.ac.ug' : 'yourname@stud.umu.ac.ug') : 'yourname@stud.umu.ac.ug'}
+                  placeholder={authType === 'login' ? (loginType === 'dean' ? 'name@stud.umu.ac.ug' : 'yourname@stud.umu.ac.ug') : 'yourname@stud.umu.ac.ug'}
                   className={errors.email ? 'input-error' : ''}
                 />
-                {formData.email && !showEmail && (
+                {formData.email && (
                   <span className={`validation-icon ${validateUMUEmail(formData.email) ? 'valid' : 'invalid'}`}>
                     {validateUMUEmail(formData.email) ? '✓' : '✗'}
                   </span>
-                )}
-                {formData.email && (
-                  <button
-                    type="button"
-                    className="email-toggle"
-                    onClick={() => setShowEmail(!showEmail)}
-                    tabIndex="-1"
-                  >
-                    {showEmail ? '👁️' : '👁️‍🗨️'}
-                  </button>
                 )}
               </div>
               {errors.email && <span className="error-text">{errors.email}</span>}
