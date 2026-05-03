@@ -4,7 +4,7 @@ import { isAuthenticated, removeToken, getUser } from '../utils/auth';
 import umuLogo from '../Assets/umu-logo.png';
 import '../styles/Navbar.css';
 
-const Navbar = ({ onAuthClick }) => {
+const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const navigate = useNavigate();
   const user = getUser();
@@ -14,11 +14,6 @@ const Navbar = ({ onAuthClick }) => {
     localStorage.removeItem('user');
     navigate('/');
     setIsMenuOpen(false);
-  };
-
-  const handleAuthClick = (type) => {
-    setIsMenuOpen(false);
-    onAuthClick(type);
   };
 
   return (
@@ -90,18 +85,20 @@ const Navbar = ({ onAuthClick }) => {
           ) : (
             <>
               <div className="nav-auth-group">
-                <button 
+                <Link 
+                  to="/login"
                   className="nav-link login-btn"
-                  onClick={() => handleAuthClick('login')}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Login
-                </button>
-                <button 
+                </Link>
+                <Link 
+                  to="/register"
                   className="nav-link register-btn"
-                  onClick={() => handleAuthClick('register')}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   Register
-                </button>
+                </Link>
               </div>
             </>
           )}

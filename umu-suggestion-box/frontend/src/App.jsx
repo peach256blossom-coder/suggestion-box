@@ -1,9 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ChatWidget from './components/ChatWidget';
-import AuthModal from './components/AuthModal';
 import Home from './components/Home';
 import PublicSuggestions from './components/PublicSuggestions';
 import Features from './components/Features';
@@ -20,25 +19,17 @@ import { isAuthenticated } from './utils/auth';
 import './styles/App.css';
 
 const ProtectedRoute = ({ children }) => {
-  return isAuthenticated() ? children : <Navigate to="/" />;
+  return isAuthenticated() ? children : <Navigate to="/login" />;
 };
 
 function App() {
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authType, setAuthType] = useState('login');
-
-  const handleAuthClick = (type) => {
-    setAuthType(type);
-    setShowAuthModal(true);
-  };
-
   return (
     <Router>
       <div className="app">
-        <Navbar onAuthClick={handleAuthClick} />
+        <Navbar />
         <main className="main-content">
           <Routes>
-            <Route path="/" element={<Home onAuthClick={handleAuthClick} />} />
+            <Route path="/" element={<Home />} />
             <Route path="/public-suggestions" element={<PublicSuggestions />} />
             <Route path="/features" element={<Features />} />
             <Route path="/support" element={<Support />} />
@@ -81,11 +72,6 @@ function App() {
             />
           </Routes>
         </main>
-        <AuthModal
-          isOpen={showAuthModal}
-          onClose={() => setShowAuthModal(false)}
-          type={authType}
-        />
         <ChatWidget />
         <Footer />
       </div>

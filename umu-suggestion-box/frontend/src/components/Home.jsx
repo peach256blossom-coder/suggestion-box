@@ -1,18 +1,10 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { isAuthenticated } from '../utils/auth';
-import AuthModal from './AuthModal';
 import '../styles/Home.css';
 
 const Home = () => {
   const navigate = useNavigate();
-  const [showAuthModal, setShowAuthModal] = useState(false);
-  const [authType, setAuthType] = useState('login');
-
-  const handleAuthClick = (type) => {
-    setAuthType(type);
-    setShowAuthModal(true);
-  };
 
   const departments = [
     {
@@ -47,7 +39,7 @@ const Home = () => {
 
   const handleDepartmentClick = (dept) => {
     if (!isAuthenticated()) {
-      handleAuthClick('login');
+      navigate('/login');
       return;
     }
     navigate('/submit-suggestion', { state: { department: dept.code } });
@@ -98,12 +90,6 @@ const Home = () => {
 
   return (
     <div className="home">
-      <AuthModal
-        isOpen={showAuthModal}
-        onClose={() => setShowAuthModal(false)}
-        type={authType}
-      />
-
       <div className="home-watermark">
         <img 
           src="https://via.placeholder.com/300?text=UMU+Nkozi+Campus" 
@@ -133,18 +119,18 @@ const Home = () => {
               </>
             ) : (
               <>
-                <button
+                <Link
+                  to="/login"
                   className="btn btn-primary"
-                  onClick={() => handleAuthClick('login')}
                 >
                   Login to View Suggestions
-                </button>
-                <button
+                </Link>
+                <Link
+                  to="/register"
                   className="btn btn-secondary"
-                  onClick={() => handleAuthClick('register')}
                 >
                   Register as Member
-                </button>
+                </Link>
               </>
             )}
           </div>
@@ -259,12 +245,12 @@ const Home = () => {
           <h2>Ready to Share Your Ideas?</h2>
           <p>Join the UMU community and help us build a better campus</p>
           {!isAuthenticated() && (
-            <button 
+            <Link 
+              to="/register"
               className="btn btn-large"
-              onClick={() => handleAuthClick('register')}
             >
               Create Your Account Today
-            </button>
+            </Link>
           )}
         </div>
       </div>
