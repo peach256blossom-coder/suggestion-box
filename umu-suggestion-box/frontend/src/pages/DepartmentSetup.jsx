@@ -15,6 +15,7 @@ const DepartmentSetup = () => {
   
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -103,7 +104,7 @@ const DepartmentSetup = () => {
             <label>UMU Campus Email *</label>
             <div className="input-wrapper">
               <input
-                type="email"
+                type={showEmail ? 'text' : 'email'}
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
@@ -111,10 +112,24 @@ const DepartmentSetup = () => {
                 placeholder="yourname@stud.umu.ac.ug"
                 className={errors.email ? 'input-error' : ''}
               />
-              {formData.email && (
+              {formData.email && !showEmail && (
                 <span className={`email-validation-icon ${validateUMUEmail(formData.email) ? 'valid' : 'invalid'}`}>
                   {validateUMUEmail(formData.email) ? '✓' : '✗'}
                 </span>
+              )}
+              {formData.email && (
+                <button
+                  type="button"
+                  className="email-toggle"
+                  onClick={() => setShowEmail(!showEmail)}
+                  tabIndex="-1"
+                >
+                  {showEmail ? (
+                    <span title="Hide email">👁️</span>
+                  ) : (
+                    <span title="Show email">👁️‍🗨️</span>
+                  )}
+                </button>
               )}
             </div>
             {errors.email && <span className="error-text">{errors.email}</span>}

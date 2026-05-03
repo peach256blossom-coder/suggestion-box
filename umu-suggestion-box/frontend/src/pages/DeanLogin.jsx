@@ -10,6 +10,7 @@ const DeanLogin = () => {
     password: '' 
   });
   const [showPassword, setShowPassword] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
   const [errors, setErrors] = useState({});
   const [serverError, setServerError] = useState('');
   const [loading, setLoading] = useState(false);
@@ -87,7 +88,7 @@ const DeanLogin = () => {
             <label>Email Address *</label>
             <div className="input-wrapper">
               <input
-                type="email"
+                type={showEmail ? 'text' : 'email'}
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
@@ -95,6 +96,20 @@ const DeanLogin = () => {
                 placeholder="name@stud.umu.ac.ug"
                 className={errors.email ? 'input-error' : ''}
               />
+              {formData.email && (
+                <button
+                  type="button"
+                  className="email-toggle"
+                  onClick={() => setShowEmail(!showEmail)}
+                  tabIndex="-1"
+                >
+                  {showEmail ? (
+                    <span title="Hide email">👁️</span>
+                  ) : (
+                    <span title="Show email">👁️‍🗨️</span>
+                  )}
+                </button>
+              )}
             </div>
             {errors.email && <span className="error-text">{errors.email}</span>}
           </div>

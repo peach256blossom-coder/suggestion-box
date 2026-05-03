@@ -90,6 +90,25 @@
   font-family: inherit;
   transition: all 0.3s;
   background: #fafafa;
+  color: #2c3e50;
+}
+
+.form-group input::placeholder {
+  color: #999;
+  opacity: 1;
+}
+
+.form-group select {
+  color: #2c3e50;
+}
+
+/* Ensure text is visible in all input types */
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  -webkit-text-fill-color: #2c3e50 !important;
+  color: #2c3e50 !important;
+  opacity: 1 !important;
 }
 
 .form-group input:focus,
@@ -127,6 +146,26 @@
 }
 
 .password-toggle:hover {
+  transform: scale(1.1);
+  opacity: 0.7;
+}
+
+/* Email Visibility Toggle */
+.email-toggle {
+  position: absolute;
+  right: 12px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  font-size: 1.2em;
+  transition: all 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.email-toggle:hover {
   transform: scale(1.1);
   opacity: 0.7;
 }
