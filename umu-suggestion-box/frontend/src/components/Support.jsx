@@ -34,7 +34,7 @@ const Support = () => {
         'Office: Student Center, Campus',
       ],
       whatsapp: {
-        number: '+256 123 456 789',
+        number: '+256 706930650',
         label: 'Message us on WhatsApp',
         url: supportWhatsappUrl,
       },
