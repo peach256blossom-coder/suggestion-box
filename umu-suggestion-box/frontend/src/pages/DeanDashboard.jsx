@@ -14,6 +14,8 @@ const DeanDashboard = () => {
   const [selectedSuggestion, setSelectedSuggestion] = useState(null);
   const [responseMessage, setResponseMessage] = useState('');
   const [forwardToDept, setForwardToDept] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(null);
+  const [deleteReason, setDeleteReason] = useState('');
 
   useEffect(() => {
     if (user?.role !== 'dean_of_students') {
@@ -75,6 +77,31 @@ const DeanDashboard = () => {
     } catch (error) {
       console.error('Dean response error:', error);
       alert(error.response?.data?.message || 'Failed to submit response');
+    }
+  };
+
+  const handleDelete = async () => {
+    if (!deleteModal) return;
+
+    try {
+      await api.delete(
+        `/dean/suggestions/${deleteModal._id}/delete`,
+        {
+          data: {
+            reason: deleteReason.trim(),
+          },
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem('token')}`,
+          },
+        }
+      );
+      setDeleteModal(null);
+      setDeleteReason('');
+      alert('Suggestion deleted successfully. Notification sent to submitter.');
+      fetchSuggestions();
+    } catch (error) {
+      console.error('Delete error:', error);
+      alert(error.response?.data?.message || 'Failed to delete suggestion');
     }
   };
 
@@ -187,12 +214,23 @@ const DeanDashboard = () => {
                       <p>{suggestion.adminResponse}</p>
                     </div>
                   )}
-                  <button
-                    className="btn-respond"
-                    onClick={() => setSelectedSuggestion(suggestion)}
-                  >
-                    View & Respond
-                  </button>
+                  <div className="item-actions">
+                    <button
+                      className="btn-respond"
+                      onClick={() => setSelectedSuggestion(suggestion)}
+                    >
+                      View & Respond
+                    </button>
+                    {suggestion.status === 'resolved' && (
+                      <button
+                        className="btn-delete"
+                        onClick={() => setDeleteModal(suggestion)}
+                        title="Delete resolved suggestion and notify submitter"
+                      >
+                        🗑️ Delete & Notify Sender
+                      </button>
+                    )}
+                  </div>
                 </div>
               ))}
             </div>
@@ -282,6 +320,64 @@ const DeanDashboard = () => {
                   }
                 >
                   ✕ Rejected
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Delete Confirmation Modal */}
+      {deleteModal && (
+        <div className="modal-overlay" onClick={() => setDeleteModal(null)}>
+          <div className="modal delete-modal" onClick={(e) => e.stopPropagation()}>
+            <div className="modal-header">
+              <h2>⚠️ Delete Suggestion</h2>
+              <button
+                className="close-btn"
+                onClick={() => {
+                  setDeleteModal(null);
+                  setDeleteReason('');
+                }}
+              >
+                ✕
+              </button>
+            </div>
+
+            <div className="modal-body">
+              <div className="suggestion-preview">
+                <h3>{deleteModal.title}</h3>
+                <p className="delete-warning">
+                  This suggestion will be permanently deleted and the anonymous submitter will be notified.
+                </p>
+              </div>
+
+              <div className="delete-form">
+                <label>Optional: Reason for Deletion</label>
+                <textarea
+                  placeholder="E.g., 'This has been resolved and implemented', 'Duplicate suggestion'..."
+                  value={deleteReason}
+                  onChange={(e) => setDeleteReason(e.target.value)}
+                  rows="3"
+                />
+                <small>This will be sent to the submitter to inform them why their suggestion was deleted.</small>
+              </div>
+
+              <div className="modal-actions delete-actions">
+                <button
+                  className="btn-cancel"
+                  onClick={() => {
+                    setDeleteModal(null);
+                    setDeleteReason('');
+                  }}
+                >
+                  Cancel
+                </button>
+                <button
+                  className="btn-delete-confirm"
+                  onClick={handleDelete}
+                >
+                  🗑️ Delete & Notify Sender
                 </button>
               </div>
             </div>

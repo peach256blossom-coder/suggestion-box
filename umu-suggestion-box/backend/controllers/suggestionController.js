@@ -647,3 +647,49 @@ exports.respondToSuggestionAsDean = async (req, res, next) => {
     next(error);
   }
 };
+
+// Delete a suggestion by dean and notify the submitter
+exports.deleteSuggestionByDean = async (req, res, next) => {
+  try {
+    const { suggestionId } = req.params;
+    const { reason } = req.body;
+
+    const suggestion = await Suggestion.findById(suggestionId);
+
+    if (!suggestion) {
+      return res.status(404).json({ message: 'Suggestion not found' });
+    }
+
+    // Store submitter info before deleting
+    const submitterId = suggestion.submittedBy;
+    const suggestionTitle = suggestion.title;
+
+    // Delete the suggestion
+    await Suggestion.findByIdAndDelete(suggestionId);
+
+    // Create a deletion notification for the submitter
+    try {
+      const deleteMessage = reason 
+        ? `Your suggestion "${suggestionTitle}" has been resolved and removed to clear the queue. Reason: ${reason}`
+        : `Your suggestion "${suggestionTitle}" has been resolved and removed to avoid duplicate submissions in the future.`;
+
+      const notification = new Notification({
+        recipient: submitterId,
+        suggestion: suggestionId,
+        type: 'suggestion_deleted',
+        message: deleteMessage
+      });
+      await notification.save();
+    } catch (notifError) {
+      console.error('Error creating deletion notification:', notifError);
+    }
+
+    res.json({
+      message: 'Suggestion deleted successfully and notification sent to submitter',
+      deletedSuggestionId: suggestionId
+    });
+  } catch (error) {
+    console.error('Error deleting suggestion:', error);
+    next(error);
+  }
+};

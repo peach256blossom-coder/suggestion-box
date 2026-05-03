@@ -3,6 +3,7 @@ const {
   getAllSuggestionsForDean,
   getSuggestionsByStatusForDean,
   respondToSuggestionAsDean,
+  deleteSuggestionByDean,
 } = require('../controllers/suggestionController');
 const { deanAuth } = require('../middleware/auth');
 
@@ -16,5 +17,8 @@ router.get('/suggestions/status/:status', deanAuth, getSuggestionsByStatusForDea
 
 // Dean can respond to any suggestion
 router.put('/suggestions/:suggestionId/respond', deanAuth, respondToSuggestionAsDean);
+
+// Dean can delete a suggestion and notify the submitter
+router.delete('/suggestions/:suggestionId/delete', deanAuth, deleteSuggestionByDean);
 
 module.exports = router;
