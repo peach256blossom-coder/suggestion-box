@@ -379,6 +379,7 @@
   .form-group select,
   .form-group textarea {
     font-size: 16px; /* Prevents zoom on mobile */
+    color:#0e0d0d;
   }
 }
 
