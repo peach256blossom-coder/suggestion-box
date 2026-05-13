@@ -6,7 +6,6 @@ import ChatWidget from './components/ChatWidget';
 import Home from './components/Home';
 import PublicSuggestions from './components/PublicSuggestions';
 import Features from './components/Features';
-import Support from './components/Support';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import DeanLogin from './pages/DeanLogin';
@@ -32,7 +31,6 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/public-suggestions" element={<PublicSuggestions />} />
             <Route path="/features" element={<Features />} />
-            <Route path="/support" element={<Support />} />
             <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />

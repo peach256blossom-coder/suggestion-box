@@ -56,6 +56,18 @@ const supportSchema = new mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User'
   },
+  sendToDean: {
+    type: Boolean,
+    default: false
+  },
+  sentToDean: {
+    type: Boolean,
+    default: false
+  },
+  deanId: {
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'Dean'
+  },
   tags: [String],
   createdAt: { type: Date, default: Date.now },
   updatedAt: { type: Date, default: Date.now },

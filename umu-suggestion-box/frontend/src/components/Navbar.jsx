@@ -38,9 +38,6 @@ const Navbar = () => {
           <Link to="/features" className="nav-link" onClick={() => setIsMenuOpen(false)}>
             Features
           </Link>
-          <Link to="/support" className="nav-link" onClick={() => setIsMenuOpen(false)}>
-            Support
-          </Link>
           <Link to="/privacy-policy" className="nav-link" onClick={() => setIsMenuOpen(false)}>
             Privacy Policy
           </Link>

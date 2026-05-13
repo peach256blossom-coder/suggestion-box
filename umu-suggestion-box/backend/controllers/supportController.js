@@ -1,5 +1,6 @@
 const Support = require('../models/Support');
 const ContactInfo = require('../models/ContactInfo');
+const Dean = require('../models/Dean');
 const nodemailer = require('nodemailer');
 
 // Email transporter setup
@@ -24,13 +25,25 @@ exports.getContactInfo = async (req, res, next) => {
 // Create support ticket
 exports.createSupportTicket = async (req, res, next) => {
   try {
-    const { email, phone, subject, message, contactMethod, category, priority } = req.body;
+    const { email, phone, subject, message, contactMethod, category, priority, sendToDean } = req.body;
 
     // Validation
     if (!email || !phone || !subject || !message) {
       return res.status(400).json({ 
         message: 'Email, phone, subject, and message are required' 
       });
+    }
+
+    let deanId = null;
+    let sentToDean = false;
+
+    // If sendToDean is true, find the dean
+    if (sendToDean) {
+      const dean = await Dean.findOne();
+      if (dean) {
+        deanId = dean._id;
+        sentToDean = true;
+      }
     }
 
     const ticket = new Support({
@@ -42,6 +55,9 @@ exports.createSupportTicket = async (req, res, next) => {
       contactMethod: contactMethod || 'web',
       category: category || 'general',
       priority: priority || 'medium',
+      sendToDean,
+      sentToDean,
+      deanId,
       messages: [{
         sender: 'user',
         message: message,
@@ -51,7 +67,7 @@ exports.createSupportTicket = async (req, res, next) => {
 
     await ticket.save();
 
-    // Send confirmation email
+    // Send confirmation email to user
     try {
       await transporter.sendMail({
         from: process.env.SENDER_EMAIL || 'noreply@umusuggestionsbox.com',
@@ -71,13 +87,42 @@ exports.createSupportTicket = async (req, res, next) => {
       console.error('Error sending email:', emailError);
     }
 
+    // Send notification to dean if sendToDean is true
+    if (sentToDean && deanId) {
+      try {
+        const dean = await Dean.findById(deanId);
+        if (dean && dean.email) {
+          await transporter.sendMail({
+            from: process.env.SENDER_EMAIL || 'noreply@umusuggestionsbox.com',
+            to: dean.email,
+            subject: `New Support Message - ${subject}`,
+            html: `
+              <h2>New Support Message Directed to Dean</h2>
+              <p><strong>From:</strong> ${email}</p>
+              <p><strong>Category:</strong> ${category}</p>
+              <p><strong>Priority:</strong> ${priority}</p>
+              <p><strong>Subject:</strong> ${subject}</p>
+              <p><strong>Message:</strong></p>
+              <p>${message}</p>
+              <hr>
+              <p><strong>Ticket ID:</strong> ${ticket._id}</p>
+              <p>Please respond to this support ticket in the admin panel.</p>
+            `
+          });
+        }
+      } catch (deanEmailError) {
+        console.error('Error sending email to dean:', deanEmailError);
+      }
+    }
+
     res.status(201).json({
-      message: 'Support ticket created successfully',
+      message: 'Support ticket created successfully' + (sentToDean ? ' and sent to Dean' : ''),
       ticket: {
         _id: ticket._id,
         status: ticket.status,
         email: ticket.email,
         subject: ticket.subject,
+        sentToDean: sentToDean,
         createdAt: ticket.createdAt
       }
     });
