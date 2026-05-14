@@ -50,7 +50,7 @@ const PrivacyPolicy = () => {
         <h2>Contact</h2>
         <p>
           If you have questions about this policy, please reach out at{' '}
-          <a href="mailto:suggestionsbox@umu.ac.com">support@umusuggestionsbox.com</a>.
+          <a href="mailto:suggestions@umu.ac.com">suggestions@umu.ac.com</a>.
         </p>
       </section>
     </div>
